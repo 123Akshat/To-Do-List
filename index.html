@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body{
+            background-color: #d3deff;
+            font-family: 'Arial', sans-serifs;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container{
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+        h1{
+            margin: 0 0 20px;
+            font-size: 24px;
+            color: #5d5c61;
+        }
+        input[type="text"]{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        ul{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li{
+            background-color: #e3e3e3;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, text-decoration 0.3s;
+        }
+        li:hover{
+            background-color: #d1d1d1;
+        }
+        .done{
+            text-decoration: line-through;
+            color: #888;
+        }
+        .clear-btn {
+            background-color: #ff5c5c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .clear-btn:hover {
+            background-color: #e04a4a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List</h1>
+    <input  type="text" id="write">
+        <ul id="todo-list"></ul>
+
+        <button class="clear-btn" id="clear-btn">Clear List</button>
+        
+
+        <script>
+            let write = document.getElementById("write");
+            let todoList = document.getElementById("todo-list");
+            let clearBtn = document.getElementById("clear-btn");
+
+            write.addEventListener("keyup", function(e){
+                if(e.key == "Enter") {
+                    addTodo(this.value)
+                    this.value = '';
+                }
+            })
+
+            clearBtn.addEventListener("click", function() {
+                todoList.innerHTML = '';
+            });
+
+            function addTodo(val){
+                let list = document.createElement("li"); 
+                list.innerHTML = `${val}`;
+                todoList.appendChild(list); 
+                console.log(val)
+                list.addEventListener("click", function(){
+                    this.classList.toggle('done')
+                })
+            }
+        </script>
+    </div>
+</body>
+</html>
